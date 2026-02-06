@@ -17,6 +17,9 @@ vibe = "vibe_linter.cli:main"
 [tool.hatch.build.targets.wheel]
 packages = ["vibe_linter"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"vibe_linter/templates" = "vibe_linter/templates"
+
 [tool.hatch.build.targets.sdist]
 exclude = ["tests/"]
 

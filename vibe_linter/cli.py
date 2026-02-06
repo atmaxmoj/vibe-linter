@@ -8,6 +8,8 @@ USAGE = """\
 vibe-linter — workflow system for Claude Code
 
 Usage:
+  vibe init [template]   Initialize project with workflow template (tdd/bugfix/feature)
+  vibe setup             Configure Claude Code hooks and MCP server
   vibe load <flow>       Compile workflow, validate, output Mermaid diagram
   vibe start             Start (or resume) loaded workflow, Claude Code takes over
   vibe stop              Stop workflow, remove all constraints on Claude Code
@@ -26,7 +28,15 @@ def main():
     cwd = os.getcwd()
     command = args[0] if args else None
 
-    if command == "load":
+    if command == "init":
+        from vibe_linter.commands.init import main as init_main
+        sys.exit(init_main(args[1:]))
+
+    elif command == "setup":
+        from vibe_linter.commands.setup import main as setup_main
+        sys.exit(setup_main(args[1:]))
+
+    elif command == "load":
         if len(args) < 2:
             print("Usage: vibe load <flow-name>", file=sys.stderr)
             sys.exit(1)
