@@ -1,0 +1,23 @@
+名称: Vibe Coding
+描述: Tight retry loop — 3-way branch, no wait, no design, just code and ship
+
+步骤:
+  - 1.1 Describe what you want
+
+  - 1.2 Write code
+
+  - 1.3 Try it out
+
+  - 1.4 Evaluate result:
+      下一步:
+        - 如果: "it works perfectly, ready to ship"
+          去: 2.1 Ship it
+        - 如果: "mostly works, needs small tweaks"
+          去: 1.2 Write code
+        - 去: 1.1 Describe what you want
+
+  - 2.1 Ship it
+
+  - Done:
+      类型: terminate
+      原因: Shipped

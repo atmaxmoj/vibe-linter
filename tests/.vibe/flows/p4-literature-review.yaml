@@ -1,0 +1,41 @@
+名称: Systematic Literature Review
+描述: Paper loop with include/exclude 2-way, review fallback to search
+
+步骤:
+  # ── Search Phase ──
+
+  - 1.1 Define research question
+
+  - 1.2 Search databases
+
+  - 1.3 Collect papers
+
+  # ── Screening Loop ──
+
+  - 2.0 Paper loop:
+      遍历: "papers"
+      子步骤:
+        - 2.1 Screen paper
+        - 2.2 Include or exclude:
+            下一步:
+              - 如果: "paper meets inclusion criteria"
+                去: 2.3 Extract data
+              - 去: 2.0 Paper loop
+        - 2.3 Extract data
+
+  # ── Synthesis ──
+
+  - 3.1 Synthesize findings
+
+  - 3.2 Review:
+      类型: wait
+      下一步:
+        - 如果: "review is satisfactory"
+          去: 3.3 Write report
+        - 去: 1.2 Search databases
+
+  - 3.3 Write report
+
+  - Done:
+      类型: terminate
+      原因: Literature review complete

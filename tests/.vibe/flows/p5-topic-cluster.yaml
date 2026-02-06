@@ -1,0 +1,43 @@
+名称: Topic Cluster Pillar Page
+描述: Satellite loop, review fallback to loop for more satellites
+
+步骤:
+  # ── Planning ──
+
+  - 1.1 Define pillar topic
+
+  - 1.2 Plan satellite articles
+
+  # ── Pillar ──
+
+  - 2.1 Write pillar page
+
+  - 2.2 Pillar review:
+      类型: wait
+      下一步:
+        - 如果: "pillar page is comprehensive"
+          去: 3.0 Satellite loop
+        - 去: 1.1 Define pillar topic
+
+  # ── Satellite Loop ──
+
+  - 3.0 Satellite loop:
+      遍历: "satellites"
+      子步骤:
+        - 3.1 Write satellite article
+        - 3.2 Add internal links
+
+  # ── Review ──
+
+  - 4.1 Internal linking audit
+
+  - 4.2 Cluster review:
+      类型: wait
+      下一步:
+        - 如果: "topic cluster is complete"
+          去: Done
+        - 去: 3.0 Satellite loop
+
+  - Done:
+      类型: terminate
+      原因: Topic cluster complete

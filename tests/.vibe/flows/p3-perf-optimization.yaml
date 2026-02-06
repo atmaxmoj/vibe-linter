@@ -1,0 +1,34 @@
+名称: Performance Optimization
+描述: Hotspot loop, benchmark 2-way, final benchmark fallback
+
+步骤:
+  # ── Profiling ──
+
+  - 1.1 Profile application
+
+  - 1.2 Identify hotspots
+
+  # ── Hotspot Loop ──
+
+  - 2.0 Hotspot loop:
+      遍历: "hotspots"
+      子步骤:
+        - 2.1 Analyze hotspot
+        - 2.2 Implement optimization
+        - 2.3 Benchmark:
+            下一步:
+              - 如果: "performance improved to target"
+                去: 2.0 Hotspot loop
+              - 去: 2.2 Implement optimization
+
+  # ── Final Benchmark ──
+
+  - 3.1 Final benchmark:
+      下一步:
+        - 如果: "overall performance meets target"
+          去: Done
+        - 去: 2.0 Hotspot loop
+
+  - Done:
+      类型: terminate
+      原因: Performance targets met

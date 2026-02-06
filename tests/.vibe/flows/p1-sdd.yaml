@@ -1,0 +1,47 @@
+名称: SDD Development
+描述: Spec-Driven Development — Spec as source of truth, phase loop, 3-way compliance check
+
+步骤:
+  # ── Spec Definition ──
+
+  - 1.1 Write specification:
+      类型: wait
+
+  - 1.2 Generate implementation plan
+
+  - 1.3 Plan review:
+      类型: wait
+      下一步:
+        - 如果: "plan is approved"
+          去: 2.0 Phase loop
+        - 去: 1.2 Generate implementation plan
+
+  # ── Phase Loop ──
+
+  - 2.0 Phase loop:
+      遍历: "phases"
+      子步骤:
+        - 2.1 Implement phase
+        - 2.2 Run phase tests
+        - 2.3 Compliance check:
+            下一步:
+              - 如果: "implementation conforms to spec"
+                去: 2.0 Phase loop
+              - 如果: "implementation does not conform, code needs fixes"
+                去: 2.1 Implement phase
+              - 如果: "spec itself has issues"
+                去: 1.1 Write specification
+
+  # ── Integration ──
+
+  - 3.1 Integration testing
+
+  - 3.2 Final verification:
+      下一步:
+        - 如果: "all phases conform to spec"
+          去: Done
+        - 去: 2.0 Phase loop
+
+  - Done:
+      类型: terminate
+      原因: All phases conform to specification

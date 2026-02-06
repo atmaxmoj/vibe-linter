@@ -1,0 +1,33 @@
+名称: Exploratory Testing
+描述: Explore loop, found-issue 2-way, deep-dive 2-way
+
+步骤:
+  # ── Setup ──
+
+  - 1.1 Define exploration charter
+
+  - 1.2 Set time box
+
+  # ── Exploration Loop ──
+
+  - 2.0 Explore loop:
+      遍历: "areas"
+      子步骤:
+        - 2.1 Explore area
+        - 2.2 Found issue?:
+            下一步:
+              - 如果: "found an issue worth investigating"
+                去: 2.3 Deep dive
+              - 去: 2.0 Explore loop
+        - 2.3 Deep dive
+        - 2.4 Log findings
+
+  # ── Summary ──
+
+  - 3.1 Summarize findings
+
+  - 3.2 Write exploration report
+
+  - Done:
+      类型: terminate
+      原因: Exploratory testing session complete

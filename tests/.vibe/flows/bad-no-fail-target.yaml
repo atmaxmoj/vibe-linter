@@ -1,0 +1,7 @@
+名称: Bad - Assert Without Fail Target
+步骤:
+  - Gather data
+  - Validate:
+      类型: assert
+      条件: "data_valid == true"
+  - Continue

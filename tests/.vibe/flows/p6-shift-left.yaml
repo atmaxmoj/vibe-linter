@@ -1,0 +1,29 @@
+名称: Shift-Left Testing
+描述: Multi-wait pure linear (requirements, design, implementation each tested), no loop
+
+步骤:
+  - 1.1 Review requirements:
+      类型: wait
+
+  - 1.2 Requirements testing
+
+  - 1.3 Review design:
+      类型: wait
+
+  - 1.4 Design testing
+
+  - 1.5 Unit testing
+
+  - 1.6 Integration testing
+
+  - 1.7 E2E testing:
+      下一步:
+        - 如果: "all E2E tests pass"
+          去: 1.8 Final report
+        - 去: 1.5 Unit testing
+
+  - 1.8 Final report
+
+  - Done:
+      类型: terminate
+      原因: Shift-left testing complete

@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+.vibe/state.db
+.vibe/.loaded
+*.db
+.env

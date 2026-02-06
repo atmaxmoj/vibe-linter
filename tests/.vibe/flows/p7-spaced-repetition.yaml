@@ -1,0 +1,35 @@
+名称: Spaced Repetition
+描述: Session loop, 4-way rating (again/hard/good/easy), outer retry
+
+步骤:
+  # ── Setup ──
+
+  - 1.1 Create flashcard deck
+
+  - 1.2 Set schedule
+
+  # ── Session Loop ──
+
+  - 2.0 Session loop:
+      遍历: "sessions"
+      子步骤:
+        - 2.1 Present cards
+        - 2.2 Self-assess
+        - 2.3 Rate performance:
+            下一步:
+              - 如果: "all cards rated good or easy"
+                去: 2.0 Session loop
+              - 如果: "some cards rated hard"
+                去: 2.4 Review hard cards
+              - 如果: "some cards rated again"
+                去: 2.1 Present cards
+              - 去: 2.0 Session loop
+        - 2.4 Review hard cards
+
+  # ── Completion ──
+
+  - 3.1 Review statistics
+
+  - Done:
+      类型: terminate
+      原因: Spaced repetition cycle complete

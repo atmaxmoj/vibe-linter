@@ -1,0 +1,37 @@
+名称: Atomic Design
+描述: Nested loops — level loop containing element loop, compose upward
+
+步骤:
+  # ── Planning ──
+
+  - 1.1 Define design system levels
+
+  # ── Level Loop (Atoms → Molecules → Organisms → Templates → Pages) ──
+
+  - 2.0 Level loop:
+      遍历: "levels"
+      子步骤:
+        - 2.0.1 Element loop:
+            遍历: "current_level_elements"
+            子步骤:
+              - 2.1 Implement element
+              - 2.2 Test element
+              - 2.3 Element check:
+                  下一步:
+                    - 如果: "element is correct"
+                      去: 2.0.1 Element loop
+                    - 去: 2.1 Implement element
+
+  # ── Integration ──
+
+  - 3.1 Compose final pages
+
+  - 3.2 Integration testing:
+      下一步:
+        - 如果: "all pages render correctly"
+          去: Done
+        - 去: 2.0 Level loop
+
+  - Done:
+      类型: terminate
+      原因: All design system levels complete

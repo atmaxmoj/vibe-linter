@@ -1,0 +1,33 @@
+{
+  "mcpServers": {
+    "vibe-linter": {
+      "command": "vibe",
+      "args": [
+        "mcp-server"
+      ]
+    }
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "vibe check-edit"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "vibe inject-context"
+          }
+        ]
+      }
+    ]
+  }
+}

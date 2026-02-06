@@ -1,0 +1,39 @@
+名称: Storybook-First Development
+描述: Story loop, visual test 2-way, chromatic review wait
+
+步骤:
+  # ── Setup ──
+
+  - 1.1 Setup Storybook config
+
+  - 1.2 Define story list
+
+  # ── Story Loop ──
+
+  - 2.0 Story loop:
+      遍历: "stories"
+      子步骤:
+        - 2.1 Write story
+        - 2.2 Implement component for story
+        - 2.3 Visual test:
+            下一步:
+              - 如果: "visual test passes"
+                去: 2.0 Story loop
+              - 去: 2.2 Implement component for story
+
+  # ── Review ──
+
+  - 3.1 Run chromatic visual review
+
+  - 3.2 Chromatic review:
+      类型: wait
+      下一步:
+        - 如果: "chromatic review approved"
+          去: 3.3 Integration
+        - 去: 2.0 Story loop
+
+  - 3.3 Integration
+
+  - Done:
+      类型: terminate
+      原因: All stories pass visual review

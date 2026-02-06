@@ -1,0 +1,36 @@
+名称: Risk-Based Testing
+描述: Risk loop, 3-way (high-risk wait/medium-low record/no defect), loop with inner wait
+
+步骤:
+  # ── Risk Assessment ──
+
+  - 1.1 Identify risks
+
+  - 1.2 Prioritize by severity
+
+  # ── Risk Loop ──
+
+  - 2.0 Risk loop:
+      遍历: "risks"
+      子步骤:
+        - 2.1 Design risk test
+        - 2.2 Execute test
+        - 2.3 Evaluate result:
+            下一步:
+              - 如果: "high severity defect found"
+                去: 2.4 Wait for fix
+              - 如果: "medium or low defect found"
+                去: 2.5 Record defect
+              - 去: 2.0 Risk loop
+        - 2.4 Wait for fix:
+            类型: wait
+            下一步: 2.2 Execute test
+        - 2.5 Record defect
+
+  # ── Report ──
+
+  - 3.1 Risk test report
+
+  - Done:
+      类型: terminate
+      原因: Risk-based testing complete

@@ -1,0 +1,6 @@
+名称: Bad - Duplicate Step Names
+步骤:
+  - Do something
+  - Check result
+  - Do something
+  - Finish

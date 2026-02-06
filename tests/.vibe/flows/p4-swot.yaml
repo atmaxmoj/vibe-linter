@@ -1,0 +1,30 @@
+名称: SWOT Analysis
+描述: Pure linear S-W-O-T, review fallback to specific quadrant
+
+步骤:
+  - 1.1 Analyze Strengths
+
+  - 1.2 Analyze Weaknesses
+
+  - 1.3 Analyze Opportunities
+
+  - 1.4 Analyze Threats
+
+  - 1.5 Create SWOT matrix
+
+  - 1.6 Generate strategic recommendations
+
+  - 1.7 Review:
+      类型: wait
+      下一步:
+        - 如果: "SWOT analysis is complete and accurate"
+          去: Done
+        - 如果: "strengths section needs work"
+          去: 1.1 Analyze Strengths
+        - 如果: "opportunities section needs more research"
+          去: 1.3 Analyze Opportunities
+        - 去: 1.1 Analyze Strengths
+
+  - Done:
+      类型: terminate
+      原因: SWOT analysis complete

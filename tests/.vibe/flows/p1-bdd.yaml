@@ -1,0 +1,45 @@
+名称: BDD Development
+描述: Behaviour-Driven Development — Gherkin first, scenario loop, acceptance fallback
+
+步骤:
+  # ── Feature Definition ──
+
+  - 1.1 Define feature behavior
+
+  - 1.2 Write Gherkin scenarios:
+      类型: wait
+
+  - 1.3 Gherkin review:
+      类型: wait
+      下一步:
+        - 如果: "gherkin scenarios are approved"
+          去: 2.0 Scenario loop
+        - 去: 1.2 Write Gherkin scenarios
+
+  # ── Scenario Loop ──
+
+  - 2.0 Scenario loop:
+      遍历: "scenarios"
+      子步骤:
+        - 2.1 Implement step definitions
+        - 2.2 Run scenario
+        - 2.3 Scenario result:
+            下一步:
+              - 如果: "scenario passes"
+                去: 2.0 Scenario loop
+              - 去: 2.1 Implement step definitions
+
+  # ── Acceptance ──
+
+  - 3.1 Run all scenarios
+
+  - 3.2 Acceptance review:
+      类型: wait
+      下一步:
+        - 如果: "all scenarios pass acceptance criteria"
+          去: Done
+        - 去: 2.0 Scenario loop
+
+  - Done:
+      类型: terminate
+      原因: All scenarios pass acceptance

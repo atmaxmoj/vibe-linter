@@ -1,0 +1,33 @@
+名称: Progressive Enhancement
+描述: Enhancement loop, degradation test 2-way, no wait fully autonomous
+
+步骤:
+  # ── Base Layer ──
+
+  - 1.1 Build base HTML layer
+
+  - 1.2 Test base functionality
+
+  # ── Enhancement Loop ──
+
+  - 2.0 Enhancement loop:
+      遍历: "enhancements"
+      子步骤:
+        - 2.1 Add enhancement layer
+        - 2.2 Degradation test:
+            下一步:
+              - 如果: "enhancement works and degrades gracefully"
+                去: 2.0 Enhancement loop
+              - 去: 2.1 Add enhancement layer
+
+  # ── Final Test ──
+
+  - 3.1 Full degradation test:
+      下一步:
+        - 如果: "all layers degrade correctly"
+          去: Done
+        - 去: 2.0 Enhancement loop
+
+  - Done:
+      类型: terminate
+      原因: Progressive enhancement complete

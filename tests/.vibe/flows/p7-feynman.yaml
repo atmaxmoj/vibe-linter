@@ -1,0 +1,30 @@
+名称: Feynman Technique
+描述: Concept loop, clear 2-way (yes next/no study more), retry pattern
+
+步骤:
+  # ── Setup ──
+
+  - 1.1 Choose topic
+
+  - 1.2 List concepts to learn
+
+  # ── Concept Loop ──
+
+  - 2.0 Concept loop:
+      遍历: "concepts"
+      子步骤:
+        - 2.1 Study concept
+        - 2.2 Explain in simple terms
+        - 2.3 Clear enough?:
+            下一步:
+              - 如果: "explanation is clear and complete"
+                去: 2.0 Concept loop
+              - 去: 2.1 Study concept
+
+  # ── Summary ──
+
+  - 3.1 Create summary notes
+
+  - Done:
+      类型: terminate
+      原因: All concepts understood

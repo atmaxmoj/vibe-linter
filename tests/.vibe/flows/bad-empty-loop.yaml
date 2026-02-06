@@ -1,0 +1,8 @@
+名称: Bad - Empty Loop
+步骤:
+  - Setup
+  - Process items:
+      类型: loop
+      遍历: "items"
+  - Done:
+      类型: terminate

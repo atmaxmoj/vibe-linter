@@ -1,0 +1,40 @@
+名称: Socratic Method
+描述: Nested loops — question loop containing sub-question loop, conditional entry into inner loop
+
+步骤:
+  # ── Setup ──
+
+  - 1.1 Define topic
+
+  - 1.2 Formulate initial questions
+
+  # ── Question Loop ──
+
+  - 2.0 Question loop:
+      遍历: "questions"
+      子步骤:
+        - 2.1 Explore question
+        - 2.2 Need deeper exploration?:
+            下一步:
+              - 如果: "question is fully understood"
+                去: 2.0 Question loop
+              - 去: 2.0.1 Sub-question loop
+        - 2.0.1 Sub-question loop:
+            遍历: "sub_questions"
+            子步骤:
+              - 2.3 Explore sub-question
+              - 2.4 Sub-question resolved?:
+                  下一步:
+                    - 如果: "sub-question resolved"
+                      去: 2.0.1 Sub-question loop
+                    - 去: 2.3 Explore sub-question
+
+  # ── Synthesis ──
+
+  - 3.1 Synthesize understanding
+
+  - 3.2 Create knowledge map
+
+  - Done:
+      类型: terminate
+      原因: Socratic exploration complete
