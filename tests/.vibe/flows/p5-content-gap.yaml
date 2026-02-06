@@ -1,7 +1,7 @@
-名称: Content Gap Analysis
-描述: Gap loop, ranking 2-way, fallback to content editing
+name: Content Gap Analysis
+description: Gap loop, ranking 2-way, fallback to content editing
 
-步骤:
+steps:
   # ── Analysis ──
 
   - 1.1 Analyze competitor content
@@ -11,20 +11,20 @@
   # ── Gap Loop ──
 
   - 2.0 Gap loop:
-      遍历: "gaps"
-      子步骤:
+      iterate: "gaps"
+      children:
         - 2.1 Create content for gap
         - 2.2 Optimize for target keyword
         - 2.3 Ranking check:
-            下一步:
-              - 如果: "ranking meets target position"
-                去: 2.0 Gap loop
-              - 去: 2.1 Create content for gap
+            next:
+              - if: "ranking meets target position"
+                go: 2.0 Gap loop
+              - go: 2.1 Create content for gap
 
   # ── Review ──
 
   - 3.1 Overall ranking review
 
   - Done:
-      类型: terminate
-      原因: Content gaps addressed
+      type: terminate
+      reason: Content gaps addressed

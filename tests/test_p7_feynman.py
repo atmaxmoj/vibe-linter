@@ -588,33 +588,33 @@ def test_modify_yaml_hot_reload(harness_factory):
     assert r
     assert h.step == "1.2 List concepts to learn"
 
-    modified_yaml = """名称: Feynman Technique
-描述: Modified with peer review step
+    modified_yaml = """name: Feynman Technique
+description: Modified with peer review step
 
-步骤:
+steps:
   - 1.1 Choose topic
 
   - 1.2 List concepts to learn
 
   - 2.0 Concept loop:
-      遍历: "concepts"
-      子步骤:
+      iterate: "concepts"
+      children:
         - 2.1 Study concept
         - 2.2 Explain in simple terms
         - 2.3 Clear enough?:
-            下一步:
-              - 如果: "explanation is clear and complete"
-                去: 2.0 Concept loop
-              - 去: 2.1 Study concept
+            next:
+              - if: "explanation is clear and complete"
+                go: 2.0 Concept loop
+              - go: 2.1 Study concept
 
   - 3.05 Peer review:
-      下一步: 3.1 Create summary notes
+      next: 3.1 Create summary notes
 
   - 3.1 Create summary notes
 
   - Done:
-      类型: terminate
-      原因: All concepts understood
+      type: terminate
+      reason: All concepts understood
 """
     h.reload_yaml(modified_yaml)
 

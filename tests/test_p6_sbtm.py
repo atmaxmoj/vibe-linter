@@ -722,35 +722,35 @@ def test_modify_yaml_add_session(harness_factory):
     assert r
     assert h.step == "2.2 Record findings"
 
-    modified_yaml = """名称: SBTM Testing Modified
-步骤:
+    modified_yaml = """name: SBTM Testing Modified
+steps:
   - 1.1 Create initial charters
 
   - 2.0 Session loop:
-      遍历: "sessions"
-      子步骤:
+      iterate: "sessions"
+      children:
         - 2.1 Execute test session
         - 2.2 Record findings
         - 2.2.5 Peer review findings
         - 2.3 Need more sessions?:
-            下一步:
-              - 如果: "coverage is sufficient, no more sessions needed"
-                去: 2.0 Session loop
-              - 去: 2.0 Session loop
+            next:
+              - if: "coverage is sufficient, no more sessions needed"
+                go: 2.0 Session loop
+              - go: 2.0 Session loop
 
   - 3.1 Compile session results
 
   - 3.2 Debrief:
-      类型: wait
-      下一步:
-        - 如果: "testing is sufficient"
-          去: 3.3 Write test report
-        - 去: 2.0 Session loop
+      type: wait
+      next:
+        - if: "testing is sufficient"
+          go: 3.3 Write test report
+        - go: 2.0 Session loop
 
   - 3.3 Write test report
 
   - Done:
-      类型: terminate
+      type: terminate
 """
 
     h.reload_yaml(modified_yaml)

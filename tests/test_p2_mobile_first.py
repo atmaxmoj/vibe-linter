@@ -743,34 +743,34 @@ def test_modify_yaml_add_breakpoint(harness_factory):
     assert h.status == "running"
 
     # DevOps flagged: mobile Lighthouse score is 42 (LCP 4.2s on slow 3G). Add perf audit step.
-    modified_yaml = """名称: Mobile-First Development Modified
-描述: Breakpoint loop with performance check
+    modified_yaml = """name: Mobile-First Development Modified
+description: Breakpoint loop with performance check
 
-步骤:
+steps:
   - 1.1 Define breakpoints and layouts
 
   - 2.0 Breakpoint loop:
-      遍历: "breakpoints"
-      子步骤:
+      iterate: "breakpoints"
+      children:
         - 2.1 Implement responsive layout
         - 2.2 Test responsive behavior
         - 2.3 Responsive check:
-            下一步:
-              - 如果: "responsive layout works correctly"
-                去: 2.0 Breakpoint loop
-              - 去: 2.1 Implement responsive layout
+            next:
+              - if: "responsive layout works correctly"
+                go: 2.0 Breakpoint loop
+              - go: 2.1 Implement responsive layout
 
   - 2.9 Run performance audit
 
   - 3.1 Cross-browser testing:
-      下一步:
-        - 如果: "works across all target browsers"
-          去: Done
-        - 去: 2.0 Breakpoint loop
+      next:
+        - if: "works across all target browsers"
+          go: Done
+        - go: 2.0 Breakpoint loop
 
   - Done:
-      类型: terminate
-      原因: Mobile-first responsive design complete
+      type: terminate
+      reason: Mobile-first responsive design complete
 """
 
     h.reload_yaml(modified_yaml)

@@ -1,52 +1,52 @@
-名称: TDD Development
-描述: Test-Driven Development — Red-Green-Refactor with feature loop and 4-way quality branch
+name: TDD Development
+description: Test-Driven Development — Red-Green-Refactor with feature loop and 4-way quality branch
 
-步骤:
+steps:
   # ── Design Phase ──
 
   - 1.1 Gather requirements:
-      类型: wait
+      type: wait
 
   - 1.2 Design architecture
 
   - 1.3 Design review:
-      类型: wait
-      下一步:
-        - 如果: "design is approved and ready for implementation"
-          去: 2.0 Feature loop
-        - 去: 1.2 Design architecture
+      type: wait
+      next:
+        - if: "design is approved and ready for implementation"
+          go: 2.0 Feature loop
+        - go: 1.2 Design architecture
 
   # ── TDD Feature Loop ──
 
   - 2.0 Feature loop:
-      遍历: "features"
-      子步骤:
+      iterate: "features"
+      children:
         - 2.1 Write failing test (Red)
         - 2.2 Write minimal code (Green)
         - 2.3 Refactor
         - 2.4 Run test suite
         - 2.5 Quality check:
-            下一步:
-              - 如果: "all tests pass and code quality is good"
-                去: 2.0 Feature loop
-              - 如果: "tests fail due to code bugs"
-                去: 2.2 Write minimal code (Green)
-              - 如果: "tests themselves are wrong"
-                去: 2.1 Write failing test (Red)
-              - 如果: "design flaw discovered"
-                去: 1.2 Design architecture
+            next:
+              - if: "all tests pass and code quality is good"
+                go: 2.0 Feature loop
+              - if: "tests fail due to code bugs"
+                go: 2.2 Write minimal code (Green)
+              - if: "tests themselves are wrong"
+                go: 2.1 Write failing test (Red)
+              - if: "design flaw discovered"
+                go: 1.2 Design architecture
 
   # ── Integration ──
 
   - 3.1 Integration testing
 
   - 3.2 Final review:
-      类型: wait
-      下一步:
-        - 如果: "all integration tests pass"
-          去: Done
-        - 去: 2.0 Feature loop
+      type: wait
+      next:
+        - if: "all integration tests pass"
+          go: Done
+        - go: 2.0 Feature loop
 
   - Done:
-      类型: terminate
-      原因: All features implemented and tests pass
+      type: terminate
+      reason: All features implemented and tests pass

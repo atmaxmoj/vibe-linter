@@ -1,25 +1,25 @@
-名称: Quick Bugfix
-描述: Fast bugfix workflow - reproduce, fix, verify
+name: Quick Bugfix
+description: Fast bugfix workflow - reproduce, fix, verify
 
-步骤:
+steps:
   - 1.1 Understand the bug:
-      下一步:
-        - 如果: "bug is clear and reproducible"
-          去: 1.2 Write reproduction test
-        - 去: 1.1 Understand the bug
+      next:
+        - if: "bug is clear and reproducible"
+          go: 1.2 Write reproduction test
+        - go: 1.1 Understand the bug
 
   - 1.2 Write reproduction test
 
   - 1.3 Fix the bug
 
   - 1.4 Verify fix:
-      下一步:
-        - 如果: "test passes and no regressions"
-          去: Done
-        - 如果: "test still fails"
-          去: 1.3 Fix the bug
-        - 去: 1.2 Write reproduction test
+      next:
+        - if: "test passes and no regressions"
+          go: Done
+        - if: "test still fails"
+          go: 1.3 Fix the bug
+        - go: 1.2 Write reproduction test
 
   - Done:
-      类型: terminate
-      原因: Bug fixed and verified
+      type: terminate
+      reason: Bug fixed and verified

@@ -926,41 +926,41 @@ def test_modify_yaml_add_story(harness_factory):
     assert h.status == "running"
 
     # Accessibility team mandates axe-core audit step after recent WCAG complaint
-    modified_yaml = """名称: Storybook-First Development Modified
-描述: Story loop with accessibility check
+    modified_yaml = """name: Storybook-First Development Modified
+description: Story loop with accessibility check
 
-步骤:
+steps:
   - 1.1 Setup Storybook config
 
   - 1.2 Define story list
 
   - 2.0 Story loop:
-      遍历: "stories"
-      子步骤:
+      iterate: "stories"
+      children:
         - 2.1 Write story
         - 2.2 Implement component for story
         - 2.3 Visual test:
-            下一步:
-              - 如果: "visual test passes"
-                去: 2.0 Story loop
-              - 去: 2.2 Implement component for story
+            next:
+              - if: "visual test passes"
+                go: 2.0 Story loop
+              - go: 2.2 Implement component for story
 
   - 2.9 Run accessibility audit
 
   - 3.1 Run chromatic visual review
 
   - 3.2 Chromatic review:
-      类型: wait
-      下一步:
-        - 如果: "chromatic review approved"
-          去: 3.3 Integration
-        - 去: 2.0 Story loop
+      type: wait
+      next:
+        - if: "chromatic review approved"
+          go: 3.3 Integration
+        - go: 2.0 Story loop
 
   - 3.3 Integration
 
   - Done:
-      类型: terminate
-      原因: All stories pass visual review
+      type: terminate
+      reason: All stories pass visual review
 """
 
     h.reload_yaml(modified_yaml)

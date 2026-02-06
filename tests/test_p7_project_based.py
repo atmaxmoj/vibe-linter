@@ -638,36 +638,36 @@ def test_modify_yaml_hot_reload(harness_factory):
     assert r
     assert h.step == "1.2 Break into milestones"
 
-    modified_yaml = """名称: Project-Based Learning
-描述: Modified with code review step
+    modified_yaml = """name: Project-Based Learning
+description: Modified with code review step
 
-步骤:
+steps:
   - 1.1 Define project goals
 
   - 1.2 Break into milestones
 
   - 2.0 Milestone loop:
-      遍历: "milestones"
-      子步骤:
+      iterate: "milestones"
+      children:
         - 2.1 Study required concepts
         - 2.2 Implement milestone
         - 2.3 Test milestone
         - 2.4 Milestone met?:
-            下一步:
-              - 如果: "milestone requirements met"
-                去: 2.0 Milestone loop
-              - 去: 2.1 Study required concepts
+            next:
+              - if: "milestone requirements met"
+                go: 2.0 Milestone loop
+              - go: 2.1 Study required concepts
 
   - 3.05 Code review:
-      下一步: 3.1 Present project
+      next: 3.1 Present project
 
   - 3.1 Present project
 
   - 3.2 Reflection
 
   - Done:
-      类型: terminate
-      原因: Project complete
+      type: terminate
+      reason: Project complete
 """
     h.reload_yaml(modified_yaml)
 

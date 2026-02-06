@@ -569,43 +569,43 @@ def test_modify_yaml_add_versioning(harness_factory):
     assert r
 
     # Add versioning step via hot-reload
-    yaml_content = """名称: Contract-First Development
-描述: Formal contract, generate stubs, endpoint loop, bidirectional integration
+    yaml_content = """name: Contract-First Development
+description: Formal contract, generate stubs, endpoint loop, bidirectional integration
 
-步骤:
+steps:
   - 1.1 Define contract
 
   - 1.2 Contract review:
-      类型: wait
-      下一步:
-        - 如果: "contract is approved"
-          去: 1.3 Version contract
-        - 去: 1.1 Define contract
+      type: wait
+      next:
+        - if: "contract is approved"
+          go: 1.3 Version contract
+        - go: 1.1 Define contract
 
   - 1.3 Version contract:
-      下一步: 1.4 Generate stubs
+      next: 1.4 Generate stubs
 
   - 1.4 Generate stubs
 
   - 2.0 Endpoint loop:
-      遍历: "endpoints"
-      子步骤:
+      iterate: "endpoints"
+      children:
         - 2.1 Implement endpoint
         - 2.2 Contract validation:
-            下一步:
-              - 如果: "endpoint conforms to contract"
-                去: 2.0 Endpoint loop
-              - 去: 2.1 Implement endpoint
+            next:
+              - if: "endpoint conforms to contract"
+                go: 2.0 Endpoint loop
+              - go: 2.1 Implement endpoint
 
   - 3.1 Bidirectional integration test:
-      下一步:
-        - 如果: "both provider and consumer pass"
-          去: Done
-        - 去: 2.0 Endpoint loop
+      next:
+        - if: "both provider and consumer pass"
+          go: Done
+        - go: 2.0 Endpoint loop
 
   - Done:
-      类型: terminate
-      原因: Contract verified bidirectionally
+      type: terminate
+      reason: Contract verified bidirectionally
 """
     h.reload_yaml(yaml_content)
 

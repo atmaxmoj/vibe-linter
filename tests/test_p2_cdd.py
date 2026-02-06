@@ -855,24 +855,24 @@ def test_modify_yaml_add_component(harness_factory):
     assert h.status == "running"
 
     # Tech lead adds mandatory linting step after finding wildcard imports in Avatar component
-    modified_yaml = """名称: CDD Development Modified
-描述: CDD with added linting step
+    modified_yaml = """name: CDD Development Modified
+description: CDD with added linting step
 
-步骤:
+steps:
   - 1.1 Break page into components
 
   - 1.2 Define component interfaces
 
   - 2.0 Component loop:
-      遍历: "components"
-      子步骤:
+      iterate: "components"
+      children:
         - 2.1 Implement component
         - 2.2 Write component tests
         - 2.3 Visual check:
-            下一步:
-              - 如果: "component looks correct visually"
-                去: 2.0 Component loop
-              - 去: 2.1 Implement component
+            next:
+              - if: "component looks correct visually"
+                go: 2.0 Component loop
+              - go: 2.1 Implement component
 
   - 2.9 Lint all components
 
@@ -881,15 +881,15 @@ def test_modify_yaml_add_component(harness_factory):
   - 3.2 End-to-end testing
 
   - 3.3 PR review:
-      类型: wait
-      下一步:
-        - 如果: "PR approved"
-          去: Done
-        - 去: 2.0 Component loop
+      type: wait
+      next:
+        - if: "PR approved"
+          go: Done
+        - go: 2.0 Component loop
 
   - Done:
-      类型: terminate
-      原因: All components built and PR approved
+      type: terminate
+      reason: All components built and PR approved
 """
 
     h.reload_yaml(modified_yaml)

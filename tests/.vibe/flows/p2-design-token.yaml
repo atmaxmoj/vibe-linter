@@ -1,42 +1,42 @@
-名称: Design-Token-Based Development
-描述: Token wait then review wait then component loop then consistency 2-way check
+name: Design-Token-Based Development
+description: Token wait then review wait then component loop then consistency 2-way check
 
-步骤:
+steps:
   # ── Token Definition ──
 
   - 1.1 Define design tokens:
-      类型: wait
+      type: wait
 
   - 1.2 Token review:
-      类型: wait
-      下一步:
-        - 如果: "tokens approved"
-          去: 2.0 Component loop
-        - 去: 1.1 Define design tokens
+      type: wait
+      next:
+        - if: "tokens approved"
+          go: 2.0 Component loop
+        - go: 1.1 Define design tokens
 
   # ── Component Loop ──
 
   - 2.0 Component loop:
-      遍历: "components"
-      子步骤:
+      iterate: "components"
+      children:
         - 2.1 Implement component with tokens
         - 2.2 Test component
         - 2.3 Component check:
-            下一步:
-              - 如果: "component correctly uses tokens"
-                去: 2.0 Component loop
-              - 去: 2.1 Implement component with tokens
+            next:
+              - if: "component correctly uses tokens"
+                go: 2.0 Component loop
+              - go: 2.1 Implement component with tokens
 
   # ── Consistency ──
 
   - 3.1 Consistency audit:
-      下一步:
-        - 如果: "all components are consistent with tokens"
-          去: 3.2 Generate documentation
-        - 去: 2.0 Component loop
+      next:
+        - if: "all components are consistent with tokens"
+          go: 3.2 Generate documentation
+        - go: 2.0 Component loop
 
   - 3.2 Generate documentation
 
   - Done:
-      类型: terminate
-      原因: Design token system complete
+      type: terminate
+      reason: Design token system complete

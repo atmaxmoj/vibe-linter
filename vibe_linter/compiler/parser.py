@@ -121,7 +121,7 @@ def _process_steps(
                 config["reason"] = reason
 
         # ── Pass 2: determine transitions ──
-        # Priority: loop/branch children > explicit 下一步 > type-specific sugar > implicit next
+        # Priority: loop/branch children > explicit next > type-specific sugar > implicit next
 
         if step_type == "loop" and children_raw:
             iterate_expr = body.get("iterate")

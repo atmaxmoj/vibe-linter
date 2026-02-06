@@ -567,15 +567,15 @@ def test_modify_yaml_add_step(harness_factory):
     assert r
     assert h.step == "1.4 Design testing"
 
-    modified_yaml = """名称: Shift-Left Testing Modified
-步骤:
+    modified_yaml = """name: Shift-Left Testing Modified
+steps:
   - 1.1 Review requirements:
-      类型: wait
+      type: wait
 
   - 1.2 Requirements testing
 
   - 1.3 Review design:
-      类型: wait
+      type: wait
 
   - 1.4 Design testing
 
@@ -586,16 +586,16 @@ def test_modify_yaml_add_step(harness_factory):
   - 1.6 Integration testing
 
   - 1.7 E2E testing:
-      下一步:
-        - 如果: "all E2E tests pass"
-          去: 1.8 Final report
-        - 去: 1.5 Unit testing
+      next:
+        - if: "all E2E tests pass"
+          go: 1.8 Final report
+        - go: 1.5 Unit testing
 
   - 1.8 Final report
 
   - Done:
-      类型: terminate
-      原因: Shift-left testing complete
+      type: terminate
+      reason: Shift-left testing complete
 """
 
     h.reload_yaml(modified_yaml)

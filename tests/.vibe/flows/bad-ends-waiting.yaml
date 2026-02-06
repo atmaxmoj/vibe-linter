@@ -1,5 +1,5 @@
-名称: Bad - Ends With Wait
-步骤:
+name: Bad - Ends With Wait
+steps:
   - Do work
   - Final review:
-      类型: wait
+      type: wait

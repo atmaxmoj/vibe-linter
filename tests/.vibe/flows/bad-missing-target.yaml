@@ -1,8 +1,8 @@
-名称: Bad - Missing Jump Target
-步骤:
+name: Bad - Missing Jump Target
+steps:
   - Step A
   - Check something:
-      类型: assert
-      条件: "x == true"
-      失败跳转: Step Z
+      type: assert
+      condition: "x == true"
+      onFail: Step Z
   - Step B

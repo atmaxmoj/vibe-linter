@@ -31,20 +31,20 @@ def vibe_dir(tmp_path: Path) -> Path:
     # Create a minimal flow with step names matching node function names
     # Note: No wait steps - all steps auto-advance or require submit
     flow_yaml = """
-名称: Test Flow
-描述: Flow for testing edit constraints
+name: Test Flow
+description: Flow for testing edit constraints
 
-步骤:
+steps:
   - collect_scenario
 
   - design:
-      下一步:
-        - 去: implement
+      next:
+        - go: implement
 
   - implement
 
   - Done:
-      类型: terminate
+      type: terminate
 """
     (vibe / "flows").mkdir()
     (vibe / "flows" / "test.yaml").write_text(flow_yaml, encoding="utf-8")

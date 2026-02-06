@@ -1,5 +1,5 @@
-名称: Bad - Duplicate Step Names
-步骤:
+name: Bad - Duplicate Step Names
+steps:
   - Do something
   - Check result
   - Do something

@@ -1,49 +1,49 @@
-名称: Project SOP
-描述: Full project lifecycle — from product design to final test pass
+name: Project SOP
+description: Full project lifecycle — from product design to final test pass
 
-步骤:
+steps:
   # ── Phase 1: Product Design ──
 
   - 1.1 Define product/feature:
-      类型: wait
+      type: wait
 
   - 1.2 LLM translate to design diagrams
 
   - 1.3 Check for gaps:
-      下一步:
-        - 如果: "the design is complete, no missing requirements or ambiguous specs"
-          去: 1.4 TLA+ verify state transitions
-        - 去: 1.1 Define product/feature
+      next:
+        - if: "the design is complete, no missing requirements or ambiguous specs"
+          go: 1.4 TLA+ verify state transitions
+        - go: 1.1 Define product/feature
 
   - 1.4 TLA+ verify state transitions:
-      下一步:
-        - 如果: "all state transitions are valid, no issues found"
-          去: 2.1 Determine tech stack
-        - 去: 1.2 LLM translate to design diagrams
+      next:
+        - if: "all state transitions are valid, no issues found"
+          go: 2.1 Determine tech stack
+        - go: 1.2 LLM translate to design diagrams
 
   # ── Phase 2: Technical Design ──
 
   - 2.1 Determine tech stack
 
   - 2.2 Human supplement:
-      类型: wait
+      type: wait
 
   - 2.3 Detailed TLA+ verification
 
   - 2.4 Find bugs:
-      下一步:
-        - 如果: "no bugs found in the technical design"
-          去: 2.5 Draw diagrams, human confirms
-        - 如果: "bugs found that require fundamental tech stack changes"
-          去: 2.1 Determine tech stack
-        - 去: 2.2 Human supplement
+      next:
+        - if: "no bugs found in the technical design"
+          go: 2.5 Draw diagrams, human confirms
+        - if: "bugs found that require fundamental tech stack changes"
+          go: 2.1 Determine tech stack
+        - go: 2.2 Human supplement
 
   - 2.5 Draw diagrams, human confirms:
-      类型: wait
-      下一步:
-        - 如果: "human approved the technical design"
-          去: 3.1 DDD layered design
-        - 去: 2.1 Determine tech stack
+      type: wait
+      next:
+        - if: "human approved the technical design"
+          go: 3.1 DDD layered design
+        - go: 2.1 Determine tech stack
 
   # ── Phase 3: Code Structure Design ──
 
@@ -52,42 +52,42 @@
   - 3.2 Output directory structure + responsibilities
 
   - 3.3 Human review + TLA+:
-      类型: wait
-      下一步:
-        - 如果: "human approved the code structure and TLA+ passed"
-          去: 4.1 Design tests per state transition
-        - 去: 2.1 Determine tech stack
+      type: wait
+      next:
+        - if: "human approved the code structure and TLA+ passed"
+          go: 4.1 Design tests per state transition
+        - go: 2.1 Determine tech stack
 
   # ── Phase 4: Test Design ──
 
   - 4.1 Design tests per state transition
 
   - 4.2 Human review:
-      类型: wait
-      下一步:
-        - 如果: "human approved the test design"
-          去: 5.0 TDD loop
-        - 去: 4.1 Design tests per state transition
+      type: wait
+      next:
+        - if: "human approved the test design"
+          go: 5.0 TDD loop
+        - go: 4.1 Design tests per state transition
 
   # ── Phase 5: TDD Development ──
 
   - 5.0 TDD loop:
-      遍历: "features"
-      子步骤:
+      iterate: "features"
+      children:
         - 5.1 Write e2e tests
         - 5.2 Break down to unit tests
         - 5.3 Write code per design
         - 5.4 Run tests
         - 5.5 Check compliance:
-            下一步:
-              - 如果: "all tests pass and implementation matches the design"
-                去: 5.0 TDD loop
-              - 如果: "code has bugs but tests and design are correct"
-                去: 5.3 Write code per design
-              - 如果: "tests are wrong or incomplete"
-                去: 5.1 Write e2e tests
-              - 如果: "fundamental design issues found"
-                去: 3.1 DDD layered design
+            next:
+              - if: "all tests pass and implementation matches the design"
+                go: 5.0 TDD loop
+              - if: "code has bugs but tests and design are correct"
+                go: 5.3 Write code per design
+              - if: "tests are wrong or incomplete"
+                go: 5.1 Write e2e tests
+              - if: "fundamental design issues found"
+                go: 3.1 DDD layered design
 
   # ── Phase 6: Integration Testing ──
 
@@ -96,34 +96,34 @@
   - 6.2 Scan traces, batch by root cause
 
   - 6.0 Batch loop:
-      遍历: "batches"
-      子步骤:
+      iterate: "batches"
+      children:
         - 6.0.1 Test loop:
-            遍历: "current_batch_tests"
-            子步骤:
+            iterate: "current_batch_tests"
+            children:
               - 6.3 Read trace carefully
               - 6.3.1 Enough logs?:
-                  下一步:
-                    - 如果: "sufficient log entries to identify the root cause with confidence"
-                      去: 6.4 Confirm root cause
-                    - 去: 6.3.2 Add logs and rerun
+                  next:
+                    - if: "sufficient log entries to identify the root cause with confidence"
+                      go: 6.4 Confirm root cause
+                    - go: 6.3.2 Add logs and rerun
               - 6.3.2 Add logs and rerun:
-                  下一步: 6.3 Read trace carefully
+                  next: 6.3 Read trace carefully
               - 6.4 Confirm root cause
               - 6.4.1 Is flaky?:
-                  下一步:
-                    - 如果: "the failure appears to be flaky or non-deterministic"
-                      去: 6.4.2 Run 5 times to confirm
-                    - 去: 6.5 Implement fix
+                  next:
+                    - if: "the failure appears to be flaky or non-deterministic"
+                      go: 6.4.2 Run 5 times to confirm
+                    - go: 6.5 Implement fix
               - 6.4.2 Run 5 times to confirm
               - 6.5 Implement fix
 
   - 6.6 Full rerun:
-      下一步:
-        - 如果: "all tests pass, no failures or flaky tests remaining"
-          去: Done
-        - 去: 6.1 Run full test suite, collect failures
+      next:
+        - if: "all tests pass, no failures or flaky tests remaining"
+          go: Done
+        - go: 6.1 Run full test suite, collect failures
 
   - Done:
-      类型: terminate
-      原因: All tests passed, project complete
+      type: terminate
+      reason: All tests passed, project complete

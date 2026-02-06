@@ -583,36 +583,36 @@ def test_modify_yaml(harness_factory):
     assert r
     assert h.step == "2.2 Self-assess"
 
-    modified_yaml = """名称: Spaced Repetition
-描述: Modified with difficulty adjustment
+    modified_yaml = """name: Spaced Repetition
+description: Modified with difficulty adjustment
 
-步骤:
+steps:
   - 1.1 Create flashcard deck
 
   - 1.2 Set schedule
 
   - 2.0 Session loop:
-      遍历: "sessions"
-      子步骤:
+      iterate: "sessions"
+      children:
         - 2.1 Present cards
         - 2.2 Self-assess
         - 2.25 Adjust difficulty
         - 2.3 Rate performance:
-            下一步:
-              - 如果: "all cards rated good or easy"
-                去: 2.0 Session loop
-              - 如果: "some cards rated hard"
-                去: 2.4 Review hard cards
-              - 如果: "some cards rated again"
-                去: 2.1 Present cards
-              - 去: 2.0 Session loop
+            next:
+              - if: "all cards rated good or easy"
+                go: 2.0 Session loop
+              - if: "some cards rated hard"
+                go: 2.4 Review hard cards
+              - if: "some cards rated again"
+                go: 2.1 Present cards
+              - go: 2.0 Session loop
         - 2.4 Review hard cards
 
   - 3.1 Review statistics
 
   - Done:
-      类型: terminate
-      原因: Spaced repetition cycle complete
+      type: terminate
+      reason: Spaced repetition cycle complete
 """
     h.reload_yaml(modified_yaml)
 

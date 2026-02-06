@@ -682,33 +682,33 @@ def test_modify_yaml(harness_factory):
     assert r
     assert h.step == "2.2 Execute test"
 
-    modified_yaml = """名称: Risk-Based Testing Modified
-步骤:
+    modified_yaml = """name: Risk-Based Testing Modified
+steps:
   - 1.1 Identify risks
   - 1.2 Prioritize by severity
 
   - 2.0 Risk loop:
-      遍历: "risks"
-      子步骤:
+      iterate: "risks"
+      children:
         - 2.1 Design risk test
         - 2.2 Execute test
         - 2.2.5 Verify test coverage
         - 2.3 Evaluate result:
-            下一步:
-              - 如果: "high severity defect found"
-                去: 2.4 Wait for fix
-              - 如果: "medium or low defect found"
-                去: 2.5 Record defect
-              - 去: 2.0 Risk loop
+            next:
+              - if: "high severity defect found"
+                go: 2.4 Wait for fix
+              - if: "medium or low defect found"
+                go: 2.5 Record defect
+              - go: 2.0 Risk loop
         - 2.4 Wait for fix:
-            类型: wait
-            下一步: 2.2 Execute test
+            type: wait
+            next: 2.2 Execute test
         - 2.5 Record defect
 
   - 3.1 Risk test report
 
   - Done:
-      类型: terminate
+      type: terminate
 """
 
     h.reload_yaml(modified_yaml)

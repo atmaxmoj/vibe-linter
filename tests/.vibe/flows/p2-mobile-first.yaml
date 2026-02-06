@@ -1,7 +1,7 @@
-名称: Mobile-First Development
-描述: Breakpoint loop, responsive 2-way check, cross-browser fallback
+name: Mobile-First Development
+description: Breakpoint loop, responsive 2-way check, cross-browser fallback
 
-步骤:
+steps:
   # ── Planning ──
 
   - 1.1 Define breakpoints and layouts
@@ -9,24 +9,24 @@
   # ── Breakpoint Loop ──
 
   - 2.0 Breakpoint loop:
-      遍历: "breakpoints"
-      子步骤:
+      iterate: "breakpoints"
+      children:
         - 2.1 Implement responsive layout
         - 2.2 Test responsive behavior
         - 2.3 Responsive check:
-            下一步:
-              - 如果: "responsive layout works correctly"
-                去: 2.0 Breakpoint loop
-              - 去: 2.1 Implement responsive layout
+            next:
+              - if: "responsive layout works correctly"
+                go: 2.0 Breakpoint loop
+              - go: 2.1 Implement responsive layout
 
   # ── Cross-Browser ──
 
   - 3.1 Cross-browser testing:
-      下一步:
-        - 如果: "works across all target browsers"
-          去: Done
-        - 去: 2.0 Breakpoint loop
+      next:
+        - if: "works across all target browsers"
+          go: Done
+        - go: 2.0 Breakpoint loop
 
   - Done:
-      类型: terminate
-      原因: Mobile-first responsive design complete
+      type: terminate
+      reason: Mobile-first responsive design complete

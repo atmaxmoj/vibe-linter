@@ -507,48 +507,48 @@ def test_mid_spec_update_stop_resume(harness_factory):
     assert h.status == "stopped"
     assert h.step == "2.2 Run phase tests"
 
-    modified_yaml = """名称: SDD Development
-描述: Spec-Driven Development with code review
+    modified_yaml = """name: SDD Development
+description: Spec-Driven Development with code review
 
-步骤:
+steps:
   - 1.1 Write specification:
-      类型: wait
+      type: wait
 
   - 1.2 Generate implementation plan
 
   - 1.3 Plan review:
-      类型: wait
-      下一步:
-        - 如果: "plan is approved"
-          去: 2.0 Phase loop
-        - 去: 1.2 Generate implementation plan
+      type: wait
+      next:
+        - if: "plan is approved"
+          go: 2.0 Phase loop
+        - go: 1.2 Generate implementation plan
 
   - 2.0 Phase loop:
-      遍历: "phases"
-      子步骤:
+      iterate: "phases"
+      children:
         - 2.1 Implement phase
         - 2.1b Code review
         - 2.2 Run phase tests
         - 2.3 Compliance check:
-            下一步:
-              - 如果: "implementation conforms to spec"
-                去: 2.0 Phase loop
-              - 如果: "implementation does not conform, code needs fixes"
-                去: 2.1 Implement phase
-              - 如果: "spec itself has issues"
-                去: 1.1 Write specification
+            next:
+              - if: "implementation conforms to spec"
+                go: 2.0 Phase loop
+              - if: "implementation does not conform, code needs fixes"
+                go: 2.1 Implement phase
+              - if: "spec itself has issues"
+                go: 1.1 Write specification
 
   - 3.1 Integration testing
 
   - 3.2 Final verification:
-      下一步:
-        - 如果: "all phases conform to spec"
-          去: Done
-        - 去: 2.0 Phase loop
+      next:
+        - if: "all phases conform to spec"
+          go: Done
+        - go: 2.0 Phase loop
 
   - Done:
-      类型: terminate
-      原因: All phases conform to specification
+      type: terminate
+      reason: All phases conform to specification
 """
 
     h.reload_yaml(modified_yaml)

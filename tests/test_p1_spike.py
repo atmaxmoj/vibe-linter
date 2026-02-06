@@ -679,10 +679,10 @@ def test_modify_yaml_add_spike_step(harness_factory):
     assert h.step == "1.2 Build prototype"
 
     # Team realizes spike goals are too broad -- add a review step to YAML
-    new_yaml = """名称: Spike and Stabilize
-描述: Modified with extra step
+    new_yaml = """name: Spike and Stabilize
+description: Modified with extra step
 
-步骤:
+steps:
   - 1.1 Define spike goals
 
   - 1.15 Review spike goals
@@ -690,36 +690,36 @@ def test_modify_yaml_add_spike_step(harness_factory):
   - 1.2 Build prototype
 
   - 1.3 Spike evaluation:
-      下一步:
-        - 如果: "spike proves the approach is viable"
-          去: 2.0 Development loop
-        - 去: 1.4 Pivot approach
+      next:
+        - if: "spike proves the approach is viable"
+          go: 2.0 Development loop
+        - go: 1.4 Pivot approach
 
   - 1.4 Pivot approach:
-      下一步: 1.2 Build prototype
+      next: 1.2 Build prototype
 
   - 2.0 Development loop:
-      遍历: "work_items"
-      子步骤:
+      iterate: "work_items"
+      children:
         - 2.1 Implement feature
         - 2.2 Write tests
         - 2.3 Run tests
         - 2.4 Feature quality check:
-            下一步:
-              - 如果: "feature is complete and tests pass"
-                去: 2.0 Development loop
-              - 去: 2.1 Implement feature
+            next:
+              - if: "feature is complete and tests pass"
+                go: 2.0 Development loop
+              - go: 2.1 Implement feature
 
   - 3.1 Demo to stakeholder:
-      类型: wait
-      下一步:
-        - 如果: "demo approved"
-          去: Done
-        - 去: 1.4 Pivot approach
+      type: wait
+      next:
+        - if: "demo approved"
+          go: Done
+        - go: 1.4 Pivot approach
 
   - Done:
-      类型: terminate
-      原因: Spike validated and development complete
+      type: terminate
+      reason: Spike validated and development complete
 """
     h.reload_yaml(new_yaml)
 

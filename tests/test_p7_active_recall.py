@@ -607,37 +607,37 @@ def test_modify_yaml(harness_factory):
     assert r
     assert h.step == "2.1 Study topic"
 
-    modified_yaml = """名称: Active Recall
-描述: Modified with review notes step
+    modified_yaml = """name: Active Recall
+description: Modified with review notes step
 
-步骤:
+steps:
   - 1.1 Define exam topics
 
   - 1.2 Create study plan
 
   - 2.0 Topic loop:
-      遍历: "topics"
-      子步骤:
+      iterate: "topics"
+      children:
         - 2.1 Study topic
         - 2.15 Review notes
         - 2.2 Self-test
         - 2.3 Pass?:
-            下一步:
-              - 如果: "passed self-test"
-                去: 2.0 Topic loop
-              - 去: 2.1 Study topic
+            next:
+              - if: "passed self-test"
+                go: 2.0 Topic loop
+              - go: 2.1 Study topic
 
   - 3.1 Take mock exam
 
   - 3.2 Mock result:
-      下一步:
-        - 如果: "passed mock exam"
-          去: Done
-        - 去: 2.0 Topic loop
+      next:
+        - if: "passed mock exam"
+          go: Done
+        - go: 2.0 Topic loop
 
   - Done:
-      类型: terminate
-      原因: Exam preparation complete
+      type: terminate
+      reason: Exam preparation complete
 """
     h.reload_yaml(modified_yaml)
 

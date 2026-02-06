@@ -601,44 +601,44 @@ def test_modify_yaml_add_validation_step(harness_factory):
     assert h.step == "1.2 Spec review"
 
     # Security audit requires automated spec validation with Spectral
-    yaml_content = """名称: API-First Development
-描述: OpenAPI spec first, endpoint loop, contract test 2-way, integration fallback
+    yaml_content = """name: API-First Development
+description: OpenAPI spec first, endpoint loop, contract test 2-way, integration fallback
 
-步骤:
+steps:
   - 1.1 Write OpenAPI spec
 
   - 1.2 Spec review:
-      类型: wait
-      下一步:
-        - 如果: "spec is approved"
-          去: 1.3 Validate spec
-        - 去: 1.1 Write OpenAPI spec
+      type: wait
+      next:
+        - if: "spec is approved"
+          go: 1.3 Validate spec
+        - go: 1.1 Write OpenAPI spec
 
   - 1.3 Validate spec:
-      下一步: 2.0 Endpoint loop
+      next: 2.0 Endpoint loop
 
   - 2.0 Endpoint loop:
-      遍历: "endpoints"
-      子步骤:
+      iterate: "endpoints"
+      children:
         - 2.1 Implement endpoint
         - 2.2 Write contract tests
         - 2.3 Contract test:
-            下一步:
-              - 如果: "contract test passes"
-                去: 2.0 Endpoint loop
-              - 去: 2.1 Implement endpoint
+            next:
+              - if: "contract test passes"
+                go: 2.0 Endpoint loop
+              - go: 2.1 Implement endpoint
 
   - 3.1 Integration testing:
-      下一步:
-        - 如果: "all endpoints work together"
-          去: 3.2 Generate documentation
-        - 去: 2.0 Endpoint loop
+      next:
+        - if: "all endpoints work together"
+          go: 3.2 Generate documentation
+        - go: 2.0 Endpoint loop
 
   - 3.2 Generate documentation
 
   - Done:
-      类型: terminate
-      原因: API fully implemented and documented
+      type: terminate
+      reason: API fully implemented and documented
 """
     h.reload_yaml(yaml_content)
 

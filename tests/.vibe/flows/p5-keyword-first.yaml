@@ -1,54 +1,54 @@
-名称: Keyword-First Workflow
-描述: Multi-wait (topic/keyword/outline/final review), section loop, final review fallback
+name: Keyword-First Workflow
+description: Multi-wait (topic/keyword/outline/final review), section loop, final review fallback
 
-步骤:
+steps:
   # ── Research Phase ──
 
   - 1.1 Choose topic:
-      类型: wait
+      type: wait
 
   - 1.2 Keyword research
 
   - 1.3 Keyword review:
-      类型: wait
-      下一步:
-        - 如果: "keywords approved"
-          去: 1.4 Write outline
-        - 去: 1.2 Keyword research
+      type: wait
+      next:
+        - if: "keywords approved"
+          go: 1.4 Write outline
+        - go: 1.2 Keyword research
 
   - 1.4 Write outline
 
   - 1.5 Outline review:
-      类型: wait
-      下一步:
-        - 如果: "outline approved"
-          去: 2.0 Section loop
-        - 去: 1.4 Write outline
+      type: wait
+      next:
+        - if: "outline approved"
+          go: 2.0 Section loop
+        - go: 1.4 Write outline
 
   # ── Writing Loop ──
 
   - 2.0 Section loop:
-      遍历: "sections"
-      子步骤:
+      iterate: "sections"
+      children:
         - 2.1 Write section draft
         - 2.2 Optimize for SEO
         - 2.3 Section quality check:
-            下一步:
-              - 如果: "section meets quality and SEO standards"
-                去: 2.0 Section loop
-              - 去: 2.1 Write section draft
+            next:
+              - if: "section meets quality and SEO standards"
+                go: 2.0 Section loop
+              - go: 2.1 Write section draft
 
   # ── Final Review ──
 
   - 3.1 Assemble full article
 
   - 3.2 Final review:
-      类型: wait
-      下一步:
-        - 如果: "article approved for publication"
-          去: Done
-        - 去: 2.0 Section loop
+      type: wait
+      next:
+        - if: "article approved for publication"
+          go: Done
+        - go: 2.0 Section loop
 
   - Done:
-      类型: terminate
-      原因: Article published
+      type: terminate
+      reason: Article published

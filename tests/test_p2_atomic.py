@@ -833,39 +833,39 @@ def test_modify_yaml_add_level(harness_factory):
     assert h.status == "running"
 
     # Design lead mandates auto-generated Storybook docs before page composition
-    modified_yaml = """名称: Atomic Design Modified
-描述: Nested loops with documentation step
+    modified_yaml = """name: Atomic Design Modified
+description: Nested loops with documentation step
 
-步骤:
+steps:
   - 1.1 Define design system levels
 
   - 2.0 Level loop:
-      遍历: "levels"
-      子步骤:
+      iterate: "levels"
+      children:
         - 2.0.1 Element loop:
-            遍历: "current_level_elements"
-            子步骤:
+            iterate: "current_level_elements"
+            children:
               - 2.1 Implement element
               - 2.2 Test element
               - 2.3 Element check:
-                  下一步:
-                    - 如果: "element is correct"
-                      去: 2.0.1 Element loop
-                    - 去: 2.1 Implement element
+                  next:
+                    - if: "element is correct"
+                      go: 2.0.1 Element loop
+                    - go: 2.1 Implement element
 
   - 3.0 Generate design system documentation
 
   - 3.1 Compose final pages
 
   - 3.2 Integration testing:
-      下一步:
-        - 如果: "all pages render correctly"
-          去: Done
-        - 去: 2.0 Level loop
+      next:
+        - if: "all pages render correctly"
+          go: Done
+        - go: 2.0 Level loop
 
   - Done:
-      类型: terminate
-      原因: All design system levels complete
+      type: terminate
+      reason: All design system levels complete
 """
 
     h.reload_yaml(modified_yaml)

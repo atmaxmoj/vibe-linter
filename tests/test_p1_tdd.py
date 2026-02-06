@@ -1244,43 +1244,43 @@ def test_s10_happy_path(harness_factory):
     h.goto("2.3 Refactor")
 
     # Tech lead: "After the security incident, all code must have PR review before CI runs"
-    modified_yaml = """名称: TDD Development Modified
-描述: TDD with mandatory PR review step added mid-sprint
+    modified_yaml = """name: TDD Development Modified
+description: TDD with mandatory PR review step added mid-sprint
 
-步骤:
+steps:
   - 1.1 Gather requirements:
-      类型: wait
+      type: wait
   - 1.2 Design architecture
   - 1.3 Design review:
-      类型: wait
-      下一步:
-        - 如果: "design is approved"
-          去: 2.0 Feature loop
-        - 去: 1.2 Design architecture
+      type: wait
+      next:
+        - if: "design is approved"
+          go: 2.0 Feature loop
+        - go: 1.2 Design architecture
   - 2.0 Feature loop:
-      遍历: "features"
-      子步骤:
+      iterate: "features"
+      children:
         - 2.1 Write failing test (Red)
         - 2.2 Write minimal code (Green)
         - 2.3 Refactor
         - 2.3.5 Code review:
-            类型: wait
+            type: wait
         - 2.4 Run test suite
         - 2.5 Quality check:
-            下一步:
-              - 如果: "all tests pass"
-                去: 2.0 Feature loop
-              - 去: 2.2 Write minimal code (Green)
+            next:
+              - if: "all tests pass"
+                go: 2.0 Feature loop
+              - go: 2.2 Write minimal code (Green)
   - 3.1 Integration testing
   - 3.2 Final review:
-      类型: wait
-      下一步:
-        - 如果: "all integration tests pass"
-          去: Done
-        - 去: 2.0 Feature loop
+      type: wait
+      next:
+        - if: "all integration tests pass"
+          go: Done
+        - go: 2.0 Feature loop
   - Done:
-      类型: terminate
-      原因: All features implemented and tests pass
+      type: terminate
+      reason: All features implemented and tests pass
 """
     h.reload_yaml(modified_yaml)
 
@@ -1322,43 +1322,43 @@ def test_s10_node_on_new_step(harness_factory):
     h.start()
     h.goto("2.3 Refactor")
 
-    modified_yaml = """名称: TDD Development Modified
-描述: TDD with code review
+    modified_yaml = """name: TDD Development Modified
+description: TDD with code review
 
-步骤:
+steps:
   - 1.1 Gather requirements:
-      类型: wait
+      type: wait
   - 1.2 Design architecture
   - 1.3 Design review:
-      类型: wait
-      下一步:
-        - 如果: "design is approved"
-          去: 2.0 Feature loop
-        - 去: 1.2 Design architecture
+      type: wait
+      next:
+        - if: "design is approved"
+          go: 2.0 Feature loop
+        - go: 1.2 Design architecture
   - 2.0 Feature loop:
-      遍历: "features"
-      子步骤:
+      iterate: "features"
+      children:
         - 2.1 Write failing test (Red)
         - 2.2 Write minimal code (Green)
         - 2.3 Refactor
         - 2.3.5 Code review:
-            类型: wait
+            type: wait
         - 2.4 Run test suite
         - 2.5 Quality check:
-            下一步:
-              - 如果: "all tests pass"
-                去: 2.0 Feature loop
-              - 去: 2.2 Write minimal code (Green)
+            next:
+              - if: "all tests pass"
+                go: 2.0 Feature loop
+              - go: 2.2 Write minimal code (Green)
   - 3.1 Integration testing
   - 3.2 Final review:
-      类型: wait
-      下一步:
-        - 如果: "all integration tests pass"
-          去: Done
-        - 去: 2.0 Feature loop
+      type: wait
+      next:
+        - if: "all integration tests pass"
+          go: Done
+        - go: 2.0 Feature loop
   - Done:
-      类型: terminate
-      原因: All features implemented and tests pass
+      type: terminate
+      reason: All features implemented and tests pass
 """
     h.reload_yaml(modified_yaml)
 

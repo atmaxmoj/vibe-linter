@@ -1,39 +1,39 @@
-名称: Hexagonal Architecture
-描述: Port loop, adapter test 2-way, end-to-end fallback
+name: Hexagonal Architecture
+description: Port loop, adapter test 2-way, end-to-end fallback
 
-步骤:
+steps:
   # ── Domain Design ──
 
   - 1.1 Design domain model
 
   - 1.2 Domain review:
-      类型: wait
-      下一步:
-        - 如果: "domain model approved"
-          去: 2.0 Port loop
-        - 去: 1.1 Design domain model
+      type: wait
+      next:
+        - if: "domain model approved"
+          go: 2.0 Port loop
+        - go: 1.1 Design domain model
 
   # ── Port Loop ──
 
   - 2.0 Port loop:
-      遍历: "ports"
-      子步骤:
+      iterate: "ports"
+      children:
         - 2.1 Define port interface
         - 2.2 Implement adapter
         - 2.3 Adapter test:
-            下一步:
-              - 如果: "adapter test passes"
-                去: 2.0 Port loop
-              - 去: 2.2 Implement adapter
+            next:
+              - if: "adapter test passes"
+                go: 2.0 Port loop
+              - go: 2.2 Implement adapter
 
   # ── End-to-End ──
 
   - 3.1 End-to-end testing:
-      下一步:
-        - 如果: "all ports and adapters work end to end"
-          去: Done
-        - 去: 2.0 Port loop
+      next:
+        - if: "all ports and adapters work end to end"
+          go: Done
+        - go: 2.0 Port loop
 
   - Done:
-      类型: terminate
-      原因: Hexagonal architecture verified
+      type: terminate
+      reason: Hexagonal architecture verified

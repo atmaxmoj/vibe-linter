@@ -1,7 +1,7 @@
-名称: Competitive Analysis
-描述: Competitor loop, review fallback to loop for more research
+name: Competitive Analysis
+description: Competitor loop, review fallback to loop for more research
 
-步骤:
+steps:
   # ── Planning ──
 
   - 1.1 Define analysis criteria
@@ -11,8 +11,8 @@
   # ── Competitor Loop ──
 
   - 2.0 Competitor loop:
-      遍历: "competitors"
-      子步骤:
+      iterate: "competitors"
+      children:
         - 2.1 Research competitor
         - 2.2 Analyze strengths and weaknesses
         - 2.3 Document findings
@@ -24,14 +24,14 @@
   - 3.2 Generate insights
 
   - 3.3 Review:
-      类型: wait
-      下一步:
-        - 如果: "analysis is comprehensive"
-          去: 3.4 Write final report
-        - 去: 2.0 Competitor loop
+      type: wait
+      next:
+        - if: "analysis is comprehensive"
+          go: 3.4 Write final report
+        - go: 2.0 Competitor loop
 
   - 3.4 Write final report
 
   - Done:
-      类型: terminate
-      原因: Competitive analysis complete
+      type: terminate
+      reason: Competitive analysis complete

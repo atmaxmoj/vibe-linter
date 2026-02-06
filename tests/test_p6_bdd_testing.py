@@ -767,35 +767,35 @@ def test_modify_yaml_add_step(harness_factory):
     assert r
     assert h.step == "2.2 Run scenario"
 
-    modified_yaml = """名称: BDD Testing Modified
-步骤:
+    modified_yaml = """name: BDD Testing Modified
+steps:
   - 1.1 Write feature file
 
   - 1.2 Define scenarios
 
   - 2.0 Scenario loop:
-      遍历: "scenarios"
-      子步骤:
+      iterate: "scenarios"
+      children:
         - 2.1 Write step definitions
         - 2.2 Run scenario
         - 2.2.5 Review output
         - 2.3 Scenario result:
-            下一步:
-              - 如果: "scenario passes"
-                去: 2.0 Scenario loop
-              - 去: 2.1 Write step definitions
+            next:
+              - if: "scenario passes"
+                go: 2.0 Scenario loop
+              - go: 2.1 Write step definitions
 
   - 3.1 Run full feature
 
   - 3.2 Acceptance:
-      类型: wait
-      下一步:
-        - 如果: "feature accepted"
-          去: Done
-        - 去: 2.0 Scenario loop
+      type: wait
+      next:
+        - if: "feature accepted"
+          go: Done
+        - go: 2.0 Scenario loop
 
   - Done:
-      类型: terminate
+      type: terminate
 """
 
     h.reload_yaml(modified_yaml)

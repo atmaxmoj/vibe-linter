@@ -595,41 +595,41 @@ def test_modify_yaml(harness_factory):
     assert r
     assert h.step == "2.1 Explore question"
 
-    modified_yaml = """名称: Socratic Method
-描述: Modified with reflection step
+    modified_yaml = """name: Socratic Method
+description: Modified with reflection step
 
-步骤:
+steps:
   - 1.1 Define topic
 
   - 1.2 Formulate initial questions
 
   - 2.0 Question loop:
-      遍历: "questions"
-      子步骤:
+      iterate: "questions"
+      children:
         - 2.1 Explore question
         - 2.15 Reflect on question
         - 2.2 Need deeper exploration?:
-            下一步:
-              - 如果: "question is fully understood"
-                去: 2.0 Question loop
-              - 去: 2.0.1 Sub-question loop
+            next:
+              - if: "question is fully understood"
+                go: 2.0 Question loop
+              - go: 2.0.1 Sub-question loop
         - 2.0.1 Sub-question loop:
-            遍历: "sub_questions"
-            子步骤:
+            iterate: "sub_questions"
+            children:
               - 2.3 Explore sub-question
               - 2.4 Sub-question resolved?:
-                  下一步:
-                    - 如果: "sub-question resolved"
-                      去: 2.0.1 Sub-question loop
-                    - 去: 2.3 Explore sub-question
+                  next:
+                    - if: "sub-question resolved"
+                      go: 2.0.1 Sub-question loop
+                    - go: 2.3 Explore sub-question
 
   - 3.1 Synthesize understanding
 
   - 3.2 Create knowledge map
 
   - Done:
-      类型: terminate
-      原因: Socratic exploration complete
+      type: terminate
+      reason: Socratic exploration complete
 """
     h.reload_yaml(modified_yaml)
 

@@ -1,7 +1,7 @@
-名称: BDD Testing Cucumber
-描述: Scenario loop, step definition 2-way, acceptance fallback
+name: BDD Testing Cucumber
+description: Scenario loop, step definition 2-way, acceptance fallback
 
-步骤:
+steps:
   # ── Feature Setup ──
 
   - 1.1 Write feature file
@@ -11,27 +11,27 @@
   # ── Scenario Loop ──
 
   - 2.0 Scenario loop:
-      遍历: "scenarios"
-      子步骤:
+      iterate: "scenarios"
+      children:
         - 2.1 Write step definitions
         - 2.2 Run scenario
         - 2.3 Scenario result:
-            下一步:
-              - 如果: "scenario passes"
-                去: 2.0 Scenario loop
-              - 去: 2.1 Write step definitions
+            next:
+              - if: "scenario passes"
+                go: 2.0 Scenario loop
+              - go: 2.1 Write step definitions
 
   # ── Acceptance ──
 
   - 3.1 Run full feature
 
   - 3.2 Acceptance:
-      类型: wait
-      下一步:
-        - 如果: "feature accepted"
-          去: Done
-        - 去: 2.0 Scenario loop
+      type: wait
+      next:
+        - if: "feature accepted"
+          go: Done
+        - go: 2.0 Scenario loop
 
   - Done:
-      类型: terminate
-      原因: BDD testing complete
+      type: terminate
+      reason: BDD testing complete

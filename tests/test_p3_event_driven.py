@@ -576,10 +576,10 @@ def test_modify_yaml_add_monitoring(harness_factory):
     assert h.step == "1.2 Design event flow"
 
     # SRE team requires monitoring step -- hot-reload YAML
-    yaml_content = """名称: Event-Driven Architecture
-描述: Event loop, 3-way (success/retry/redesign), cross-phase fallback to definition
+    yaml_content = """name: Event-Driven Architecture
+description: Event loop, 3-way (success/retry/redesign), cross-phase fallback to definition
 
-步骤:
+steps:
   - 1.1 Define event schema
 
   - 1.2 Design event flow
@@ -587,28 +587,28 @@ def test_modify_yaml_add_monitoring(harness_factory):
   - 1.3 Setup event monitoring
 
   - 2.0 Event loop:
-      遍历: "events"
-      子步骤:
+      iterate: "events"
+      children:
         - 2.1 Implement event handler
         - 2.2 Test event processing
         - 2.3 Event result:
-            下一步:
-              - 如果: "event processes successfully"
-                去: 2.0 Event loop
-              - 如果: "event lost or failed, needs retry logic"
-                去: 2.1 Implement event handler
-              - 如果: "event design is fundamentally flawed"
-                去: 1.1 Define event schema
+            next:
+              - if: "event processes successfully"
+                go: 2.0 Event loop
+              - if: "event lost or failed, needs retry logic"
+                go: 2.1 Implement event handler
+              - if: "event design is fundamentally flawed"
+                go: 1.1 Define event schema
 
   - 3.1 End-to-end event flow test:
-      下一步:
-        - 如果: "all events flow correctly end to end"
-          去: Done
-        - 去: 2.0 Event loop
+      next:
+        - if: "all events flow correctly end to end"
+          go: Done
+        - go: 2.0 Event loop
 
   - Done:
-      类型: terminate
-      原因: Event-driven architecture verified
+      type: terminate
+      reason: Event-driven architecture verified
 """
     h.reload_yaml(yaml_content)
 

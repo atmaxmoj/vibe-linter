@@ -1,7 +1,7 @@
-名称: Grounded Theory
-描述: Coding loop, saturation/not-saturated 2-way, not-saturated goes back to collection
+name: Grounded Theory
+description: Coding loop, saturation/not-saturated 2-way, not-saturated goes back to collection
 
-步骤:
+steps:
   # ── Data Collection ──
 
   - 1.1 Collect initial data
@@ -9,28 +9,28 @@
   # ── Coding Loop ──
 
   - 2.0 Coding loop:
-      遍历: "coding_rounds"
-      子步骤:
+      iterate: "coding_rounds"
+      children:
         - 2.1 Open coding
         - 2.2 Axial coding
         - 2.3 Selective coding
         - 2.4 Saturation check:
-            下一步:
-              - 如果: "theoretical saturation reached"
-                去: 2.0 Coding loop
-              - 去: 1.1 Collect initial data
+            next:
+              - if: "theoretical saturation reached"
+                go: 2.0 Coding loop
+              - go: 1.1 Collect initial data
 
   # ── Theory ──
 
   - 3.1 Write theory
 
   - 3.2 Theory review:
-      类型: wait
-      下一步:
-        - 如果: "theory is well-grounded"
-          去: Done
-        - 去: 2.0 Coding loop
+      type: wait
+      next:
+        - if: "theory is well-grounded"
+          go: Done
+        - go: 2.0 Coding loop
 
   - Done:
-      类型: terminate
-      原因: Grounded theory complete
+      type: terminate
+      reason: Grounded theory complete

@@ -1,7 +1,7 @@
-名称: Content Refresh
-描述: Article loop, good-enough 2-way, no wait fully autonomous
+name: Content Refresh
+description: Article loop, good-enough 2-way, no wait fully autonomous
 
-步骤:
+steps:
   # ── Audit ──
 
   - 1.1 Audit existing content
@@ -11,21 +11,21 @@
   # ── Refresh Loop ──
 
   - 2.0 Article loop:
-      遍历: "articles"
-      子步骤:
+      iterate: "articles"
+      children:
         - 2.1 Analyze article performance
         - 2.2 Update content
         - 2.3 Optimize SEO
         - 2.4 Quality check:
-            下一步:
-              - 如果: "article meets current standards"
-                去: 2.0 Article loop
-              - 去: 2.2 Update content
+            next:
+              - if: "article meets current standards"
+                go: 2.0 Article loop
+              - go: 2.2 Update content
 
   # ── Publishing ──
 
   - 3.1 Publish updates
 
   - Done:
-      类型: terminate
-      原因: Content refresh complete
+      type: terminate
+      reason: Content refresh complete

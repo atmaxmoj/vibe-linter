@@ -1,17 +1,17 @@
-名称: Database Migration
-描述: No loop, 3-way (success/partial-failure/full-rollback), cross-phase fallback
+name: Database Migration
+description: No loop, 3-way (success/partial-failure/full-rollback), cross-phase fallback
 
-步骤:
+steps:
   # ── Planning ──
 
   - 1.1 Plan migration strategy
 
   - 1.2 Migration review:
-      类型: wait
-      下一步:
-        - 如果: "migration plan approved"
-          去: 2.1 Backup database
-        - 去: 1.1 Plan migration strategy
+      type: wait
+      next:
+        - if: "migration plan approved"
+          go: 2.1 Backup database
+        - go: 1.1 Plan migration strategy
 
   # ── Execution ──
 
@@ -20,23 +20,23 @@
   - 2.2 Execute migration
 
   - 2.3 Verify migration:
-      下一步:
-        - 如果: "migration fully successful"
-          去: 3.1 Post-migration validation
-        - 如果: "partial failure, some tables need fixing"
-          去: 2.4 Fix partial failure
-        - 去: 2.5 Full rollback
+      next:
+        - if: "migration fully successful"
+          go: 3.1 Post-migration validation
+        - if: "partial failure, some tables need fixing"
+          go: 2.4 Fix partial failure
+        - go: 2.5 Full rollback
 
   - 2.4 Fix partial failure:
-      下一步: 2.3 Verify migration
+      next: 2.3 Verify migration
 
   - 2.5 Full rollback:
-      下一步: 1.1 Plan migration strategy
+      next: 1.1 Plan migration strategy
 
   # ── Validation ──
 
   - 3.1 Post-migration validation
 
   - Done:
-      类型: terminate
-      原因: Database migration complete
+      type: terminate
+      reason: Database migration complete

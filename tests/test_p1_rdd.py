@@ -828,18 +828,18 @@ def test_scenario_10_modify_yaml_add_api_doc_step(harness_factory):
     assert h.step == "2.2 Write tests"
 
     # Team decides: need OpenAPI spec generation before implementation
-    modified_yaml = """名称: RDD Development
-描述: README-Driven Development with API docs
+    modified_yaml = """name: RDD Development
+description: README-Driven Development with API docs
 
-步骤:
+steps:
   - 1.1 Write README draft
 
   - 1.2 README review:
-      类型: wait
-      下一步:
-        - 如果: "README is approved"
-          去: 1.3 Write API docs
-        - 去: 1.1 Write README draft
+      type: wait
+      next:
+        - if: "README is approved"
+          go: 1.3 Write API docs
+        - go: 1.1 Write README draft
 
   - 1.3 Write API docs
 
@@ -850,23 +850,23 @@ def test_scenario_10_modify_yaml_add_api_doc_step(harness_factory):
   - 2.3 Run tests
 
   - 3.1 Align code with README:
-      下一步:
-        - 如果: "code fully aligns with README"
-          去: 3.2 Final review
-        - 如果: "code needs minor fixes"
-          去: 2.1 Implement code
-        - 去: 1.1 Write README draft
+      next:
+        - if: "code fully aligns with README"
+          go: 3.2 Final review
+        - if: "code needs minor fixes"
+          go: 2.1 Implement code
+        - go: 1.1 Write README draft
 
   - 3.2 Final review:
-      类型: wait
-      下一步:
-        - 如果: "everything is aligned and approved"
-          去: Done
-        - 去: 2.1 Implement code
+      type: wait
+      next:
+        - if: "everything is aligned and approved"
+          go: Done
+        - go: 2.1 Implement code
 
   - Done:
-      类型: terminate
-      原因: README and implementation aligned
+      type: terminate
+      reason: README and implementation aligned
 """
     h.reload_yaml(modified_yaml)
 

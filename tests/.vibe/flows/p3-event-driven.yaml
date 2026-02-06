@@ -1,7 +1,7 @@
-名称: Event-Driven Architecture
-描述: Event loop, 3-way (success/retry/redesign), cross-phase fallback to definition
+name: Event-Driven Architecture
+description: Event loop, 3-way (success/retry/redesign), cross-phase fallback to definition
 
-步骤:
+steps:
   # ── Event Definition ──
 
   - 1.1 Define event schema
@@ -11,27 +11,27 @@
   # ── Event Loop ──
 
   - 2.0 Event loop:
-      遍历: "events"
-      子步骤:
+      iterate: "events"
+      children:
         - 2.1 Implement event handler
         - 2.2 Test event processing
         - 2.3 Event result:
-            下一步:
-              - 如果: "event processes successfully"
-                去: 2.0 Event loop
-              - 如果: "event lost or failed, needs retry logic"
-                去: 2.1 Implement event handler
-              - 如果: "event design is fundamentally flawed"
-                去: 1.1 Define event schema
+            next:
+              - if: "event processes successfully"
+                go: 2.0 Event loop
+              - if: "event lost or failed, needs retry logic"
+                go: 2.1 Implement event handler
+              - if: "event design is fundamentally flawed"
+                go: 1.1 Define event schema
 
   # ── End-to-End ──
 
   - 3.1 End-to-end event flow test:
-      下一步:
-        - 如果: "all events flow correctly end to end"
-          去: Done
-        - 去: 2.0 Event loop
+      next:
+        - if: "all events flow correctly end to end"
+          go: Done
+        - go: 2.0 Event loop
 
   - Done:
-      类型: terminate
-      原因: Event-driven architecture verified
+      type: terminate
+      reason: Event-driven architecture verified

@@ -718,44 +718,44 @@ def test_modify_yaml_add_component(harness_factory):
     assert h.status == "running"
 
     # A11y team requests WCAG contrast validation step before docs
-    modified_yaml = """名称: Design-Token-Based Development Modified
-描述: Token with validation step
+    modified_yaml = """name: Design-Token-Based Development Modified
+description: Token with validation step
 
-步骤:
+steps:
   - 1.1 Define design tokens:
-      类型: wait
+      type: wait
 
   - 1.2 Token review:
-      类型: wait
-      下一步:
-        - 如果: "tokens approved"
-          去: 1.3 Validate tokens
-        - 去: 1.1 Define design tokens
+      type: wait
+      next:
+        - if: "tokens approved"
+          go: 1.3 Validate tokens
+        - go: 1.1 Define design tokens
 
   - 1.3 Validate tokens
 
   - 2.0 Component loop:
-      遍历: "components"
-      子步骤:
+      iterate: "components"
+      children:
         - 2.1 Implement component with tokens
         - 2.2 Test component
         - 2.3 Component check:
-            下一步:
-              - 如果: "component correctly uses tokens"
-                去: 2.0 Component loop
-              - 去: 2.1 Implement component with tokens
+            next:
+              - if: "component correctly uses tokens"
+                go: 2.0 Component loop
+              - go: 2.1 Implement component with tokens
 
   - 3.1 Consistency audit:
-      下一步:
-        - 如果: "all components are consistent with tokens"
-          去: 3.2 Generate documentation
-        - 去: 2.0 Component loop
+      next:
+        - if: "all components are consistent with tokens"
+          go: 3.2 Generate documentation
+        - go: 2.0 Component loop
 
   - 3.2 Generate documentation
 
   - Done:
-      类型: terminate
-      原因: Design token system complete
+      type: terminate
+      reason: Design token system complete
 """
 
     h.reload_yaml(modified_yaml)

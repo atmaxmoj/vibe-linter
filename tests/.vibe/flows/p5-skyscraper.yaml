@@ -1,7 +1,7 @@
-名称: Skyscraper Technique
-描述: Quality comparison 2-way, outreach loop, result 2-way
+name: Skyscraper Technique
+description: Quality comparison 2-way, outreach loop, result 2-way
 
-步骤:
+steps:
   # ── Research ──
 
   - 1.1 Find benchmark content
@@ -13,27 +13,27 @@
   - 2.1 Write superior content
 
   - 2.2 Quality comparison:
-      下一步:
-        - 如果: "content is clearly better than benchmark"
-          去: 3.0 Outreach loop
-        - 去: 2.1 Write superior content
+      next:
+        - if: "content is clearly better than benchmark"
+          go: 3.0 Outreach loop
+        - go: 2.1 Write superior content
 
   # ── Outreach Loop ──
 
   - 3.0 Outreach loop:
-      遍历: "outreach_targets"
-      子步骤:
+      iterate: "outreach_targets"
+      children:
         - 3.1 Contact target
         - 3.2 Track response:
-            下一步:
-              - 如果: "got a positive response or backlink"
-                去: 3.0 Outreach loop
-              - 去: 3.0 Outreach loop
+            next:
+              - if: "got a positive response or backlink"
+                go: 3.0 Outreach loop
+              - go: 3.0 Outreach loop
 
   # ── Results ──
 
   - 4.1 Analyze outreach results
 
   - Done:
-      类型: terminate
-      原因: Skyscraper campaign complete
+      type: terminate
+      reason: Skyscraper campaign complete

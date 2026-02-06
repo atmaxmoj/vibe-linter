@@ -1,7 +1,7 @@
-名称: Thematic Analysis
-描述: Braun and Clarke 6-step linear flow, review fallback to coding or earlier
+name: Thematic Analysis
+description: Braun and Clarke 6-step linear flow, review fallback to coding or earlier
 
-步骤:
+steps:
   - 1.1 Familiarize with data
 
   - 1.2 Generate initial codes
@@ -15,14 +15,14 @@
   - 1.6 Write report
 
   - 1.7 Report review:
-      类型: wait
-      下一步:
-        - 如果: "report is satisfactory"
-          去: Done
-        - 如果: "themes need refinement"
-          去: 1.5 Define and name themes
-        - 去: 1.2 Generate initial codes
+      type: wait
+      next:
+        - if: "report is satisfactory"
+          go: Done
+        - if: "themes need refinement"
+          go: 1.5 Define and name themes
+        - go: 1.2 Generate initial codes
 
   - Done:
-      类型: terminate
-      原因: Thematic analysis complete
+      type: terminate
+      reason: Thematic analysis complete

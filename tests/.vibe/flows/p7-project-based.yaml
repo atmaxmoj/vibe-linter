@@ -1,7 +1,7 @@
-名称: Project-Based Learning
-描述: Milestone loop, pass 2-way (yes/no study more), retry pattern
+name: Project-Based Learning
+description: Milestone loop, pass 2-way (yes/no study more), retry pattern
 
-步骤:
+steps:
   # ── Project Setup ──
 
   - 1.1 Define project goals
@@ -11,16 +11,16 @@
   # ── Milestone Loop ──
 
   - 2.0 Milestone loop:
-      遍历: "milestones"
-      子步骤:
+      iterate: "milestones"
+      children:
         - 2.1 Study required concepts
         - 2.2 Implement milestone
         - 2.3 Test milestone
         - 2.4 Milestone met?:
-            下一步:
-              - 如果: "milestone requirements met"
-                去: 2.0 Milestone loop
-              - 去: 2.1 Study required concepts
+            next:
+              - if: "milestone requirements met"
+                go: 2.0 Milestone loop
+              - go: 2.1 Study required concepts
 
   # ── Presentation ──
 
@@ -29,5 +29,5 @@
   - 3.2 Reflection
 
   - Done:
-      类型: terminate
-      原因: Project complete
+      type: terminate
+      reason: Project complete

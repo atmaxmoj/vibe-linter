@@ -1380,43 +1380,43 @@ def test_modify_yaml_add_context(harness_factory):
     assert h.step == "2.1 Design aggregates and entities"
 
     # Compliance team requires mandatory invariant validation before implementation
-    new_yaml = """名称: DDD Development
-描述: Modified with validation step
+    new_yaml = """name: DDD Development
+description: Modified with validation step
 
-步骤:
+steps:
   - 1.1 Identify bounded contexts
 
   - 1.2 Define ubiquitous language
 
   - 2.0 Context loop:
-      遍历: "bounded_contexts"
-      子步骤:
+      iterate: "bounded_contexts"
+      children:
         - 2.1 Design aggregates and entities
         - 2.15 Validate aggregate design
         - 2.2 Implement domain model
         - 2.3 Write domain tests
         - 2.4 Context review:
-            类型: wait
-            下一步:
-              - 如果: "context implementation is approved"
-                去: 2.0 Context loop
-              - 如果: "needs minor fixes"
-                去: 2.2 Implement domain model
-              - 去: 2.1 Design aggregates and entities
+            type: wait
+            next:
+              - if: "context implementation is approved"
+                go: 2.0 Context loop
+              - if: "needs minor fixes"
+                go: 2.2 Implement domain model
+              - go: 2.1 Design aggregates and entities
 
   - 3.1 Integrate bounded contexts
 
   - 3.2 Integration testing
 
   - 3.3 Final review:
-      下一步:
-        - 如果: "integration is solid"
-          去: Done
-        - 去: 2.0 Context loop
+      next:
+        - if: "integration is solid"
+          go: Done
+        - go: 2.0 Context loop
 
   - Done:
-      类型: terminate
-      原因: All bounded contexts integrated
+      type: terminate
+      reason: All bounded contexts integrated
 """
     h.reload_yaml(new_yaml)
 
@@ -1461,43 +1461,43 @@ def test_s9_node_on_new_step(harness_factory):
     h.submit({})
     assert h.step == "2.1 Design aggregates and entities"
 
-    new_yaml = """名称: DDD Development
-描述: Modified with validation step
+    new_yaml = """name: DDD Development
+description: Modified with validation step
 
-步骤:
+steps:
   - 1.1 Identify bounded contexts
 
   - 1.2 Define ubiquitous language
 
   - 2.0 Context loop:
-      遍历: "bounded_contexts"
-      子步骤:
+      iterate: "bounded_contexts"
+      children:
         - 2.1 Design aggregates and entities
         - 2.15 Validate aggregate design
         - 2.2 Implement domain model
         - 2.3 Write domain tests
         - 2.4 Context review:
-            类型: wait
-            下一步:
-              - 如果: "context implementation is approved"
-                去: 2.0 Context loop
-              - 如果: "needs minor fixes"
-                去: 2.2 Implement domain model
-              - 去: 2.1 Design aggregates and entities
+            type: wait
+            next:
+              - if: "context implementation is approved"
+                go: 2.0 Context loop
+              - if: "needs minor fixes"
+                go: 2.2 Implement domain model
+              - go: 2.1 Design aggregates and entities
 
   - 3.1 Integrate bounded contexts
 
   - 3.2 Integration testing
 
   - 3.3 Final review:
-      下一步:
-        - 如果: "integration is solid"
-          去: Done
-        - 去: 2.0 Context loop
+      next:
+        - if: "integration is solid"
+          go: Done
+        - go: 2.0 Context loop
 
   - Done:
-      类型: terminate
-      原因: All bounded contexts integrated
+      type: terminate
+      reason: All bounded contexts integrated
 """
     h.reload_yaml(new_yaml)
 

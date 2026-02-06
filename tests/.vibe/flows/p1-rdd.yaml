@@ -1,17 +1,17 @@
-名称: RDD Development
-描述: README-Driven Development — linear flow with 2 wait gates and alignment 3-way fallback
+name: RDD Development
+description: README-Driven Development — linear flow with 2 wait gates and alignment 3-way fallback
 
-步骤:
+steps:
   # ── README Phase ──
 
   - 1.1 Write README draft
 
   - 1.2 README review:
-      类型: wait
-      下一步:
-        - 如果: "README is approved"
-          去: 2.1 Implement code
-        - 去: 1.1 Write README draft
+      type: wait
+      next:
+        - if: "README is approved"
+          go: 2.1 Implement code
+        - go: 1.1 Write README draft
 
   # ── Implementation ──
 
@@ -24,20 +24,20 @@
   # ── Alignment ──
 
   - 3.1 Align code with README:
-      下一步:
-        - 如果: "code fully aligns with README"
-          去: 3.2 Final review
-        - 如果: "code needs minor fixes"
-          去: 2.1 Implement code
-        - 去: 1.1 Write README draft
+      next:
+        - if: "code fully aligns with README"
+          go: 3.2 Final review
+        - if: "code needs minor fixes"
+          go: 2.1 Implement code
+        - go: 1.1 Write README draft
 
   - 3.2 Final review:
-      类型: wait
-      下一步:
-        - 如果: "everything is aligned and approved"
-          去: Done
-        - 去: 2.1 Implement code
+      type: wait
+      next:
+        - if: "everything is aligned and approved"
+          go: Done
+        - go: 2.1 Implement code
 
   - Done:
-      类型: terminate
-      原因: README and implementation aligned
+      type: terminate
+      reason: README and implementation aligned
